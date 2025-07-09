@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palestra: Do Professor-Pesquisador ao Professor-Criador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E7F0C7; /* Fundo principal */
+            color: #000000;
+        }
+        /* Definição de cores como variáveis CSS para fácil reutilização */
+        :root {
+            --bg-main: #E7F0C7;
+            --bg-card: #BCDFB9;
+            --accent-1: #C87F8B;
+            --accent-2: #E9A97F;
+            --text-dark: #000000;
+            --text-light: #FFFFFF;
+        }
+        /* Animações de entrada */
+        .slide-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Estilo da barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--accent-1);
+            border-radius: 10px;
+            border: 2px solid var(--bg-main);
+        }
+        /* Estilo da navegação ativa */
+        .nav-link.active {
+            background-color: var(--accent-1);
+            color: var(--text-light);
+            transform: scale(1.05);
+        }
+        /* Estilo do Tooltip Personalizado */
+        #tooltip {
+            position: absolute;
+            display: none;
+            background-color: var(--accent-1);
+            color: var(--text-light);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            max-width: 300px;
+            z-index: 100;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            pointer-events: none; /* Impede que o tooltip interfira com o mouse */
+        }
+    </style>
+</head>
+<body class="flex">
+
+    <!-- Navegação Lateral Fixa -->
+    <nav class="hidden lg:block w-64 h-screen bg-white/50 backdrop-blur-sm p-4 fixed top-0 left-0 overflow-y-auto shadow-lg">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">Navegação</h2>
+        <ul id="nav-menu" class="space-y-2">
+            <li><a href="#slide1" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">1. Título</a></li>
+            <li><a href="#slide2" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">2. Construção</a></li>
+            <li><a href="#slide3" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">3. Fundamento</a></li>
+            <li><a href="#slide4" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">4. Disciplina RTEM</a></li>
+            <li><a href="#slide5" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">5. Ferramentas I</a></li>
+            <li><a href="#slide6" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">6. Ferramentas II</a></li>
+            <li><a href="#slide7" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">7. IA Generativa</a></li>
+            <li><a href="#slide8" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">8. Artefatos</a></li>
+            <li><a href="#slide9" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">9. Projeto Final</a></li>
+            <li><a href="#slide10" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">10. Estrutura</a></li>
+            <li><a href="#slide11" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">11. Síntese</a></li>
+            <li><a href="#slide12" class="nav-link block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 hover:bg-[#C87F8B] hover:text-white hover:shadow-md">12. Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="w-full lg:ml-64">
+        <!-- Slide 1: Título -->
+        <section id="slide1" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8 bg-cover" style="background-color: #BCDFB9;">
+            <div class="slide-content text-center bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-2xl max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4" style="color: #000000;">Do Professor-Pesquisador ao Professor-Criador</h1>
+                <p class="text-lg md:text-2xl mb-6" style="color: #000000;">Um Percurso Pedagógico com Tecnologias e Artefatos Digitais na Educação Musical</p>
+                <div class="mt-8">
+                    <p class="text-xl font-semibold" style="color: #000000;">Prof. Dr. Glauber Santiago</p>
+                    <p class="text-md" style="color: #000000;">Universidade Federal de São Carlos (UFSCar)</p>
+                </div>
+                <p class="text-sm mt-4 text-gray-600">Palestra para o PIBID - Música/UFRN</p>
+            </div>
+        </section>
+
+        <!-- Slide 2: Construção -->
+        <section id="slide2" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-center" style="color: #C87F8B;">Sobre a Construção Desta Palestra</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">Para preparar nossa conversa de hoje, parti de um diálogo entre minhas práticas docentes e a realidade de vocês. Para conhecer um pouco mais sobre o excelente trabalho que desenvolvem, consultei o artigo referenciado abaixo. Além disso, utilizei como fontes o "Caderno de Exercícios" da minha disciplina, o livro didático "Laboratório de Educação e Tecnologias" e a proposta do trabalho final "Sinfonia Educacional Tecnológica".</p>
+                <p class="mt-4 text-lg text-gray-700 leading-relaxed">Contei também com o auxílio de algumas ferramentas de Inteligência Artificial generativa para organizar e refinar as ideias. Este processo, em si, já é um exemplo prático do que vamos discutir: o uso da tecnologia como uma parceira no nosso fazer pedagógico e investigativo.</p>
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <p class="text-sm text-gray-600 font-semibold">Referência consultada:</p>
+                    <p class="text-sm text-gray-500 leading-snug">NASCIMENTO, Catarina Aracelle Porto do; ABREU, Washington Nogueira de. Pibid música/UFRN: um fomento de pesquisa na formação inicial docente em música. In: Anais do XXI Congresso da Associação Nacional de Pesquisa e Pós-Graduação em Música, 2014, Teresina. Teresina: ANPPOM, 2014.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Fundamento -->
+        <section id="slide3" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8" style="background-color: #BCDFB9;">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-center" style="color: #C87F8B;">O Fundamento: Conceitos-Chave</h2>
+                <p class="text-lg text-center mb-8">Nossa conversa parte de uma reflexão central: como podemos ampliar nossa identidade de <strong>professor-pesquisador</strong> para também sermos <strong>professores-criadores</strong>? A tecnologia aqui não é um fim, mas um ateliê para a criação pedagógica.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-6 rounded-lg cursor-pointer" style="background-color: #E9A97F;" data-tooltip-text="O framework TPACK (Technological Pedagogical Content Knowledge) foi desenvolvido por Punya Mishra e Matthew J. Koehler.">
+                        <h3 class="text-2xl font-semibold mb-2 text-white">O Mapa: TPACK</h3>
+                        <p class="text-white">Este modelo nos lembra que uma prática inovadora exige a articulação de três saberes: o <strong>Conteúdo</strong> (música), a <strong>Pedagogia</strong> (como ensinamos) e a <strong>Tecnologia</strong> (as ferramentas).</p>
+                    </div>
+                    <div class="p-6 rounded-lg cursor-pointer" style="background-color: #E9A97F;" data-tooltip-text="Os eixos pedagógicos são inspirados em propostas da educação musical moderna, com teóricos como Koellreutter, Schafer, Orff, entre outros.">
+                        <h3 class="text-2xl font-semibold mb-2 text-white">A Bússola: Eixos da Ed. Musical</h3>
+                        <p class="text-white">Para que a tecnologia tenha intencionalidade, ela precisa servir aos nossos objetivos nos eixos de <strong>Apreciação</strong>, <strong>Exploração</strong>, <strong>Execução</strong>, <strong>Criação</strong> e <strong>Registro</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Disciplina RTEM -->
+        <section id="slide4" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4" style="color: #C87F8B;">A Disciplina RTEM e seu Fio Condutor</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">Na disciplina RTEM (Recursos Tecnológicos para o Ensino de Música), o percurso é guiado pelo <strong>"Caderno de Exercícios"</strong>. Ele equilibra a escrita musical tradicional com as possibilidades da tecnologia, numa jornada progressiva que vai da notação à IA.</p>
+                <div class="resource-card" data-link="https://docs.google.com/document/d/1ws0ONP5DxvERQcr_aopzPnkgRbuwvyyzDHEVN4GUlic/edit?usp=sharing">
+                    <h3 class="font-bold text-xl mb-2">Guia de Estudos</h3>
+                    <p class="text-sm">Recursos Tecnológicos para o Ensino de Música</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Ferramentas I -->
+        <section id="slide5" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8" style="background-color: #BCDFB9;">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-center" style="color: #C87F8B;">Ferramentas Essenciais de Produção e Análise</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="p-6 rounded-lg text-center" style="background-color: #E9A97F;">
+                        <h3 class="text-2xl font-semibold mb-2 text-white">Escrita Manual</h3>
+                        <p class="text-white">A base de tudo. A escrita à mão conecta o corpo ao pensamento musical, sendo fundamental para a alfabetização e o registro de ideias.</p>
+                    </div>
+                    <div class="p-6 rounded-lg text-center" style="background-color: #E9A97F;">
+                        <h3 class="text-2xl font-semibold mb-2 text-white">MuseScore</h3>
+                        <p class="text-white">Ferramenta interativa para criar, editar e ouvir composições, facilitando a criação de material didático digital.</p>
+                    </div>
+                    <div class="p-6 rounded-lg text-center" style="background-color: #E9A97F;">
+                        <h3 class="text-2xl font-semibold mb-2 text-white">Audacity</h3>
+                        <p class="text-white">Nosso laboratório sonoro gratuito para gravação e edição, desenvolvendo a escuta ativa e a compreensão de timbre e textura.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Ferramentas II -->
+        <section id="slide6" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8">
+             <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-center" style="color: #C87F8B;">Ferramentas de Exploração e Interatividade (Cultura Maker)</h2>
+                <p class="text-lg text-center mb-6">Avançamos do digital para o físico, entrando no universo da Cultura Maker para materializar conceitos musicais abstratos.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-6 rounded-lg text-center" style="background-color: #BCDFB9;">
+                        <h3 class="text-2xl font-semibold mb-2">Scratch</h3>
+                        <p>Plataforma de programação em blocos que torna a criação de jogos e animações sonoras acessível. Explore em <a href="https://scratch.mit.edu/" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-800">scratch.mit.edu</a>.</p>
+                    </div>
+                    <div class="p-6 rounded-lg text-center" style="background-color: #BCDFB9;">
+                        <h3 class="text-2xl font-semibold mb-2">Makey Makey</h3>
+                        <p>Dispositivo que transforma objetos do cotidiano em interfaces interativas. Conheça em <a href="https://makeymakey.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-800">makeymakey.com</a>.</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-center text-gray-600">Essas ferramentas promovem uma aprendizagem baseada na exploração e no "aprender fazendo", alinhada ao construcionismo de Papert.</p>
+            </div>
+        </section>
+
+        <!-- Slide 7: IA Generativa -->
+        <section id="slide7" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8" style="background-color: #BCDFB9;">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4" style="color: #C87F8B;">A Fronteira da Criação: IA Generativa</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">A IA generativa é a nossa nova parceira criativa. Ferramentas como o Suno geram músicas completas a partir de texto, abrindo um leque de possibilidades pedagógicas: fomento à criatividade, aprendizado de teoria sob demanda e desenvolvimento da escuta crítica.</p>
+                <p class="text-md text-gray-600 mb-6">O papel do professor se transforma: tornamo-nos <strong>curadores críticos</strong> e <strong>designers de prompts</strong>.</p>
+                <div class="resource-card" data-link="https://sites.google.com/view/glauberia">
+                    <h3 class="font-bold text-xl mb-2">GlauberIA</h3>
+                    <p class="text-sm">Explore mais sobre IA na educação neste hub de recursos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Artefatos -->
+        <section id="slide8" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4" style="color: #C87F8B;">Materializando a Pedagogia: A Criação de Artefatos Digitais</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">O uso da IA nos permite criar <strong>artefatos educacionais digitais</strong>: produtos concretos com intencionalidade pedagógica, como simuladores, quizzes interativos ou linhas do tempo, que antes exigiriam programação avançada.</p>
+                <p class="text-md text-gray-600 mb-6">Ao projetar um artefato, atuamos como <strong>designers educacionais</strong>, e o objeto se torna uma ferramenta de mediação cultural (Vygotsky) e um "objeto para pensar com" (Papert).</p>
+                <div class="resource-card" data-link="https://sites.google.com/view/labedutec-glaubersantiago">
+                    <h3 class="font-bold text-xl mb-2">LabEduTec</h3>
+                    <p class="text-sm">Veja exemplos práticos de artefatos criados na disciplina.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Projeto Final -->
+        <section id="slide9" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8" style="background-color: #BCDFB9;">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4" style="color: #C87F8B;">A Culminância: O Trabalho Final "Sinfonia Educacional Tecnológica"</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">Todo o percurso de aprendizado culmina neste projeto final, o momento em que os alunos integram todos os conhecimentos para assumir plenamente o papel de <strong>professores-criadores</strong>.</p>
+                <p class="mt-4 text-gray-600">O objetivo é desenvolver um produto educacional digital completo, na forma de uma oficina musical interativa, demonstrando a articulação entre conhecimento musical, práticas pedagógicas e tecnologias digitais.</p>
+            </div>
+        </section>
+
+        <!-- Slide 10: Estrutura -->
+        <section id="slide10" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4" style="color: #C87F8B;">A Estrutura da "Sinfonia"</h2>
+                 <p class="text-lg text-gray-700 mb-6">O projeto exige a entrega de três componentes integrados e o uso de 6 ferramentas obrigatórias, forçando a aplicação prática do TPACK.</p>
+                <div class="grid md:grid-cols-3 gap-4 text-left">
+                    <div class="p-4 rounded-lg" style="background-color: #E9A97F;"><strong class="text-white">1. O Plano de Aula:</strong> A proposta pedagógica detalhada.</div>
+                    <div class="p-4 rounded-lg" style="background-color: #E9A97F;"><strong class="text-white">2. Os Materiais Didáticos:</strong> Os artefatos criados para a oficina.</div>
+                    <div class="p-4 rounded-lg" style="background-color: #E9A97F;"><strong class="text-white">3. O Portfólio Digital:</strong> Um site para apresentar o projeto.</div>
+                </div>
+                <div class="mt-8 resource-card" data-link="https://glauberlasantiago.github.io/RTEM-TrabalhoFinal/">
+                    <h3 class="font-bold text-xl mb-2">Proposta de Trabalho Final</h3>
+                    <p class="text-sm">Acesse a proposta completa com todos os detalhes e critérios.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: Síntese -->
+        <section id="slide11" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8" style="background-color: #BCDFB9;">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-center" style="color: #C87F8B;">Síntese da Jornada</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-6 rounded-lg flex items-center" style="background-color: #E9A97F;">
+                        <span class="text-4xl mr-4 text-white">→</span>
+                        <p class="text-white text-lg">Partimos de uma identidade forte de <strong>professor-pesquisador</strong>.</p>
+                    </div>
+                     <div class="p-6 rounded-lg flex items-center" style="background-color: #C87F8B;">
+                        <span class="text-4xl mr-4 text-white">→</span>
+                        <p class="text-white text-lg">Utilizamos o <strong>TPACK</strong> e os <strong>Eixos da Ed. Musical</strong> como mapa e bússola.</p>
+                    </div>
+                     <div class="p-6 rounded-lg flex items-center" style="background-color: #BCDFB9;">
+                        <span class="text-4xl mr-4 text-gray-800">→</span>
+                        <p class="text-gray-800 text-lg">Exploramos um <strong>kit de ferramentas digitais</strong> e aprendemos a criar <strong>artefatos</strong>.</p>
+                    </div>
+                     <div class="p-6 rounded-lg flex items-center" style="background-color: #E9A97F;">
+                        <span class="text-4xl mr-4 text-white">→</span>
+                        <p class="text-white text-lg">Vimos como tudo se integra em um <strong>projeto final autoral</strong>, consolidando o papel do <strong>professor-criador</strong>.</p>
+                    </div>
+                </div>
+                 <p class="mt-8 text-center text-xl font-semibold">A tecnologia se revela como um poderoso meio para projetarmos e construirmos as experiências de aprendizagem que desejamos.</p>
+            </div>
+        </section>
+
+        <!-- Slide 12: Contato -->
+        <section id="slide12" class="slide min-h-screen flex items-center justify-center p-4 lg:p-8">
+            <div class="slide-content bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6" style="color: #C87F8B;">Contato e Recursos Adicionais</h2>
+                <p class="text-lg mb-8">Agradeço a atenção e o tempo de vocês. A conversa está apenas começando.</p>
+                <div class="space-y-4">
+                    <div class="resource-card" data-link="https://www.servidores.ufscar.br/glauber/">
+                        <h3 class="font-bold text-xl mb-2">Site Profissional</h3>
+                        <p class="text-sm">Hub com todos os recursos, partituras e materiais.</p>
+                    </div>
+                     <div class="resource-card" data-link="https://sites.google.com/view/glauberia">
+                        <h3 class="font-bold text-xl mb-2">GlauberIA</h3>
+                        <p class="text-sm">Foco em Inteligência Artificial na Educação.</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-lg"><strong>E-mail:</strong> glauber@ufscar.br</p>
+                <h3 class="text-2xl font-bold mt-12 mb-4">Vamos ao nosso diálogo!</h3>
+            </div>
+        </section>
+    </main>
+
+    <!-- Tooltip Element -->
+    <div id="tooltip"></div>
+
+    <!-- Modal para feedback de cópia -->
+    <div id="copy-modal" class="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 transform -translate-y-10 transition-all duration-500">
+        Link copiado para a área de transferência!
+    </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lógica para animação de entrada dos slides
+        const slides = document.querySelectorAll('.slide-content');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        slides.forEach(slide => {
+            observer.observe(slide);
+        });
+
+        // Lógica para navegação ativa
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section.slide');
+        
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.id;
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + activeId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { 
+            threshold: 0.5
+        });
+
+        sections.forEach(section => {
+            navObserver.observe(section);
+        });
+
+        // Lógica para os cartões de recurso
+        const resourceCards = document.querySelectorAll('.resource-card');
+        const copyModal = document.getElementById('copy-modal');
+
+        resourceCards.forEach(card => {
+            card.style.backgroundColor = '#E9A97F';
+            card.style.color = '#FFFFFF';
+            card.classList.add('p-6', 'rounded-lg', 'shadow-md', 'cursor-pointer', 'transition-all', 'duration-300', 'hover:shadow-xl', 'hover:scale-105', 'relative');
+
+            const link = card.dataset.link;
+            
+            // Botão de Copiar
+            const copyButton = document.createElement('button');
+            copyButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            `;
+            copyButton.title = 'Copiar Link';
+            copyButton.classList.add('absolute', 'top-2', 'right-12', 'p-1', 'rounded-full', 'hover:bg-white/20', 'transition-colors');
+            copyButton.onclick = (e) => {
+                e.stopPropagation();
+                const textArea = document.createElement("textarea");
+                textArea.value = link;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopyFeedback();
+                } catch (err) {
+                    console.error('Falha ao copiar o texto: ', err);
+                }
+                document.body.removeChild(textArea);
+            };
+
+            // Botão de Abrir
+            const openButton = document.createElement('a');
+            openButton.href = link;
+            openButton.target = '_blank';
+            openButton.rel = 'noopener noreferrer';
+            openButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-from-square"><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/><path d="m21 3-9 9"/><path d="M15 3h6v6"/></svg>
+            `;
+            openButton.title = 'Abrir em nova aba';
+            openButton.classList.add('absolute', 'top-2', 'right-2', 'p-1', 'rounded-full', 'hover:bg-white/20', 'transition-colors');
+            openButton.onclick = (e) => {
+                e.stopPropagation();
+            };
+
+            card.appendChild(copyButton);
+            card.appendChild(openButton);
+
+            card.onclick = () => {
+                window.open(link, '_blank');
+            };
+        });
+
+        function showCopyFeedback() {
+            copyModal.classList.remove('opacity-0', '-translate-y-10');
+            copyModal.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                copyModal.classList.remove('opacity-100', 'translate-y-0');
+                copyModal.classList.add('opacity-0', '-translate-y-10');
+            }, 2000);
+        }
+
+        // Lógica para o Tooltip Personalizado
+        const tooltip = document.getElementById('tooltip');
+        const tooltipElements = document.querySelectorAll('[data-tooltip-text]');
+
+        tooltipElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                tooltip.style.left = e.pageX + 15 + 'px';
+                tooltip.style.top = e.pageY + 15 + 'px';
+            });
+            el.addEventListener('mouseenter', (e) => {
+                tooltip.innerHTML = el.getAttribute('data-tooltip-text');
+                tooltip.style.display = 'block';
+            });
+            el.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
+        });
+
+    });
+</script>
+
+</body>
+</html>
